@@ -2,57 +2,70 @@ import { useDispatch } from 'react-redux';
 import { apiRegisterUser } from '../../redux/auth/authSlice';
 
 import css from '../LoginPage/LoginPage.module.css';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 const RegisterPage = () => {
   const dispatch = useDispatch();
 
   const onSubmit = e => {
     e.preventDefault();
-    const name = e.currentTarget.elements.userName.value;
-    const email = e.currentTarget.elements.userEmail.value;
-    const password = e.currentTarget.elements.userPassword.value;
+    const name = e.currentTarget.elements.outlinedName.value;
+    const email = e.currentTarget.elements.outlinedEmail.value;
+    const password = e.currentTarget.elements.outlinedPassword.value;
     const formData = { name, email, password };
     dispatch(apiRegisterUser(formData));
   };
 
+  const inputProps = {
+    required: true,
+    minLength: 5,
+  };
   return (
     <div className={css.loginFormContainer}>
-      <h1>Register</h1>
+      <Typography variant="h3" gutterBottom>
+        Register
+      </Typography>
       <form className={css.loginFormGroup} onSubmit={onSubmit}>
-        <label className={css.loginFormlabel}>
-          Name:
-          <input
-            className={css.loginInputField}
-            type="text"
-            name="userName"
-            placeholder="Sanches"
-            minLength={2}
-            required
-          />
-        </label>
-        <label className={css.loginFormlabel}>
-          Email:
-          <input
-            className={css.loginInputField}
-            type="email"
-            name="userEmail"
-            placeholder="Sanches123@ukr.net"
-            required
-          />
-        </label>
-        <label className={css.loginFormlabel}>
-          Password:
-          <input
-            className={css.loginInputField}
-            type="password"
-            name="userPassword"
-            placeholder="*******"
-            minLength={7}
-            required
-          />
-        </label>
-        <button className={css.loginFormButton} type="submit">
-          Sign up
-        </button>
+        <TextField
+          id="outlinedName"
+          label="Name"
+          variant="outlined"
+          helperText="Please enter your username"
+          inputProps={inputProps}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          id="outlinedEmail"
+          type="email"
+          label="Email"
+          variant="outlined"
+          helperText="Sanches123@ukr.net"
+          inputProps={inputProps}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          id="outlinedPassword"
+          type="password"
+          label="Password"
+          variant="outlined"
+          helperText="Password must be at least 8 characters long"
+          minLength={8}
+          fullWidth
+          margin="normal"
+          sx={{ mb: 2 }}
+        />
+        <Box
+          sx={{
+            textAlign: 'center',
+            height: '100vh',
+          }}
+        >
+          <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+            Sign up
+          </Button>
+        </Box>
       </form>
     </div>
   );
