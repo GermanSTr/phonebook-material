@@ -51,10 +51,10 @@ const RegisterPage = () => {
           label="Password"
           variant="outlined"
           helperText="Password must be at least 8 characters long"
-          minLength={8}
           fullWidth
           margin="normal"
           sx={{ mb: 2 }}
+          inputProps={inputProps}
         />
         <Box
           sx={{

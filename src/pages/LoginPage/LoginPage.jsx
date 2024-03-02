@@ -2,6 +2,8 @@ import { useDispatch } from 'react-redux';
 import { apiLoginUser } from '../../redux/auth/authSlice';
 
 import css from './LoginPage.module.css';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 const LoginPage = () => {
   const dispatch = useDispatch();
 
@@ -13,34 +15,48 @@ const LoginPage = () => {
     dispatch(apiLoginUser(formData));
   };
 
+  const inputProps = {
+    required: true,
+    minLength: 7,
+  };
+
   return (
     <div className={css.loginFormContainer}>
-      <h1>Login</h1>
+      <Typography variant="h3" gutterBottom>
+        Login
+      </Typography>
       <form className={css.loginFormGroup} onSubmit={onSubmit}>
-        <label className={css.loginFormlabel}>
-          Email:
-          <input
-            className={css.loginInputField}
-            type="email"
-            name="userEmail"
-            placeholder="Sanches123@ukr.net"
-            required
-          />
-        </label>
-        <label className={css.loginFormlabel}>
-          Password:
-          <input
-            className={css.loginInputField}
-            type="password"
-            name="userPassword"
-            placeholder="*******"
-            minLength={7}
-            required
-          />
-        </label>
-        <button className={css.loginFormButton} type="submit">
-          Sign up
-        </button>
+        <TextField
+          id="userEmail"
+          type="email"
+          label="Email"
+          variant="outlined"
+          helperText="Sanches123@ukr.net"
+          inputProps={inputProps}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          id="userPassword"
+          type="password"
+          label="Password"
+          variant="outlined"
+          helperText="Password must be at least 8 characters long"
+          fullWidth
+          margin="normal"
+          sx={{ mb: 2 }}
+          inputProps={inputProps}
+        />
+        <Box
+          sx={{
+            textAlign: 'center',
+            height: '100vh',
+          }}
+        >
+          <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+            Sign up
+          </Button>
+        </Box>
       </form>
     </div>
   );

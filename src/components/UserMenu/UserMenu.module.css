@@ -1,9 +1,15 @@
 .userMenu {
-  margin-right: 20px;
+  margin: auto;
+  display: grid;
 }
 
 .userMenuEmail {
-  margin: 5px 0px;
+  margin-top: 5px;
+  display: flex;
+}
+
+.userMenuIcon {
+  margin-right: 5px;
 }
 
 .userMenuButton {

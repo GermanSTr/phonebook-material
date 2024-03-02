@@ -6,6 +6,8 @@ import {
 } from '../../redux/auth/authSlice.selectors';
 
 import css from './UserMenu.module.css';
+import { Button, Typography } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -17,15 +19,21 @@ export const UserMenu = () => {
   const userEmail = userData?.email ?? 'Could`t get user email';
   return (
     <div className={css.userMenu}>
-      <p className={css.userMenuEmail}>{userEmail}</p>
-      <button
-        className={css.userMenuButton}
+      <Typography component="div" className={css.userMenuEmail}>
+        <div className={css.userMenuIcon}>
+          <AccountCircleIcon />
+        </div>
+        {userEmail}
+      </Typography>
+      <Button
+        sx={{ color: '#fff' }}
+        variant="outlined"
         type="button"
         disabled={isLoading}
         onClick={handleLogout}
       >
         Logout
-      </button>
+      </Button>
     </div>
   );
 };
